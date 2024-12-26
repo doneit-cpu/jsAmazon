@@ -19,7 +19,7 @@ const products = [{
   name: 'Adults Plain Cotton T-Shirt - 2 Pack',
   ratings:{
     stars: 4.5,
-    count: 56,
+    count: 56,xvbv
   },
   priceCents: 799
 }];
