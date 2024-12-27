@@ -1,33 +1,10 @@
-const products = [{
-  image: 'images/products/athletic-cotton-socks-6-pairs.jpg',
-  name: 'Black and Gray  Athletic Cotton Socks - 6 Pairs',
-  ratings:{
-    stars: 4.5,
-    count: 87,
-  },
-  priceCents:  1090  // 1 dollar =100 cnets,
-},{
-  image: 'images/products/intermediate-composite-basketball.jpg',
-  name: 'Intermediate Size Basketball',
-  ratings:{
-    stars: 4.0,
-    count: 127,
-  },
-  priceCents: 2095,
-},{
-  image: 'images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg',
-  name: 'Adults Plain Cotton T-Shirt - 2 Pack',
-  ratings:{
-    stars: 4.5,
-    count: 56,xvbv
-  },
-  priceCents: 799
-}];
+import {cart , addtocart } from '../data/cart.js';
+import { products } from '../data/products.js';   // module always has to top of the file , and opening file or render(html on chrome or load) we need to opne with live server , bcs module work with live server only 
 
 let productHTML = '';
-
-products.forEach((product)=>{
-   productHTML +=`
+// main idea od js , save data , then genrate html , make interactive
+products.forEach((product) => {
+  productHTML += `
   <div class="product-container">
           <div class="product-image-container">
             <img class="product-image"
@@ -40,9 +17,9 @@ products.forEach((product)=>{
 
           <div class="product-rating-container">
             <img class="product-rating-stars"
-              src="images/ratings/rating-${product.ratings.stars * 10}.png">
+              src="images/ratings/rating-${product.rating.stars * 10}.png">
             <div class="product-rating-count link-primary">
-              ${product.ratings.count}
+              ${product.rating.count}
             </div>
           </div>
 
@@ -72,7 +49,8 @@ products.forEach((product)=>{
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary">
+          <button class="add-to-cart-button button-primary js-add-to-cart"
+          data-product-id="${product.id}">
             Add to Cart
           </button>
         </div>`;
@@ -80,6 +58,40 @@ products.forEach((product)=>{
 
 });
 
-console.log(productHTML);
+//Module means varible which is inside the file , will be inside the file  so , so naming conflict where we same name vaaible(in both file ) , and don't work
 
-document.querySelector('.js-products-grid').innerHTML=productHTML;
+/*here we had done this done products.js file which is just we had done export type thing  , so we had done thsi , and after this we run amazon.js which take product info from this  product.js , and amzon .js file run this and it's make dynamic htm , also we done in first product.js file first and after amazon bcs we info product*/
+document.querySelector('.js-products-grid').innerHTML = productHTML;
+// console.log(cart);
+
+function updatecartquantity(){
+
+   
+  let cartQuantity=0;
+
+  cart.forEach((item)=>{
+    cartQuantity +=item.quantity;
+  });
+
+  console.log(cartQuantity)
+  document.querySelector('.js-cart-quantity').innerHTML=cartQuantity;
+
+  console.log(cart);
+
+}
+
+
+// when u get this product-id  ,it's called kabab case when we - , so when u change it's name ,it's has written like this productId
+document.querySelectorAll('.js-add-to-cart').forEach(
+  (button) => {
+    button.addEventListener('click', () => {
+      const productId = button.dataset.productId; // give id  
+
+      addtocart(productId);   // add the productid into the id 
+
+      updatecartquantity(); // update the quantity of product whic u have order 
+
+    })
+
+  // 12:28
+  });
