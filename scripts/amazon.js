@@ -1,5 +1,7 @@
 import {cart , addtocart } from '../data/cart.js';
-import { products } from '../data/products.js';   // module always has to top of the file , and opening file or render(html on chrome or load) we need to opne with live server , bcs module work with live server only 
+import { products } from '../data/products.js'; 
+import { formatCurrency } from './utils/money.js';
+// module always has to top of the file , and opening file or render(html on chrome or load) we need to opne with live server , bcs module work with live server only 
 
 let productHTML = '';
 // main idea od js , save data , then genrate html , make interactive
@@ -24,7 +26,7 @@ products.forEach((product) => {
           </div>
 
           <div class="product-price">
-            $${(product.priceCents / 100).toFixed(2)}   
+            $${formatCurrency(product.priceCents)}   
           </div>
 
           <div class="product-quantity-container">
@@ -85,7 +87,7 @@ function updatecartquantity(){
 document.querySelectorAll('.js-add-to-cart').forEach(
   (button) => {
     button.addEventListener('click', () => {
-      const productId = button.dataset.productId; // give id  
+      const productId = button.dataset.productId; // it make uniqe code with the button by attaching the product id
 
       addtocart(productId);   // add the productid into the id 
 
