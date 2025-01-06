@@ -75,10 +75,10 @@ function updatecartquantity(){
     cartQuantity +=item.quantity;
   });
 
-  console.log(cartQuantity)
+  // console.log(cartQuantity)
   document.querySelector('.js-cart-quantity').innerHTML=cartQuantity;
 
-  console.log(cart);
+  // console.log(cart);
 
 }
 
