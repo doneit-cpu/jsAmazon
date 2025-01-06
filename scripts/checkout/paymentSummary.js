@@ -1,6 +1,6 @@
-import { cart } from '../../data/cart.js'
+import { cart ,updatedeliveryOption} from '../../data/cart.js'
 import { getProduct } from '../../data/products.js'
-import { getDeliveryOption } from '../../data/deliveryOptions.js';
+import { getDeliveryOption  } from '../../data/deliveryOptions.js';
 import {formatCurrency} from '../utils/money.js'
 
 export function renderpaymentSummary(){
@@ -59,5 +59,20 @@ export function renderpaymentSummary(){
 
           document.querySelector('.payment-summary').innerHTML=paymentSummaryhtml;
 
+
+          // document.querySelectorAll('.js-delivery-option')
+          // .forEach((element)=>{
+            
+          //   element.addEventListener('click',()=>{
+          //     const {productId,deliveryoptionsId}=element.dataset;
+          //     // this shortcut for taling data atributes , like data-(name)=${your,id} , it's uniqe name ot the of element in 
+          //     updatedeliveryOption(productId,deliveryoptionsId);
+          //     renderpaymentSummary();
+          //   })
+          // })
+
 }
+
+
+
 // console.trace();

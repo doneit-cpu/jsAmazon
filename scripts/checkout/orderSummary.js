@@ -3,6 +3,7 @@ import { products , getProduct } from '../../data/products.js';
 import { formatCurrency } from '../utils/money.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js'  
 import { deliveryOptions ,getDeliveryOption} from '../../data/deliveryOptions.js'
+import { renderpaymentSummary } from '../checkout/paymentSummary.js'
 
 // hell0();
 const today=dayjs();
@@ -133,9 +134,9 @@ document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
 
 document.querySelectorAll('.js-delete-link').forEach((link)=>{
   link.addEventListener('click',()=>{
-    const productId =link.dataset.productId;
+    const productId =link.dataset.productId; // give us the new product of the perticular id 
     removeFromCart(productId);
-
+    renderpaymentSummary();
     const container=document.querySelector(`.js-cart-item-container-${productId}`);// give access to whole item cart class
     // console.log(container);
       container.remove();  // this will remoeve whole html from (dom), shoert cut for remove item from webpage // like an dyanmic remove the item from display 
@@ -147,12 +148,13 @@ document.querySelectorAll('.js-delete-link').forEach((link)=>{
 
 document.querySelectorAll('.js-delivery-option')
   .forEach((element)=>{
-    
+       // this so imp thing , which take your id and the and then make intercative , here we used the productid for product  and the deliveryOption which give us the id for that pertuclar id
     element.addEventListener('click',()=>{
       const {productId,deliveryoptionsId}=element.dataset;
       // this shortcut for taling data atributes , like data-(name)=${your,id} , it's uniqe name ot the of element in 
       updatedeliveryOption(productId,deliveryoptionsId);
-      renderOrdersummany();
+      renderpaymentSummary();
+      renderOrdersummany();  // this make new html , when we had updated the storage by above the thing , this update the storage then it take thing then html ,
     })
   })
  
