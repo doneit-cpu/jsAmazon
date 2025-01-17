@@ -1,4 +1,4 @@
-import {cart , addtocart } from '../data/cart.js';
+import {cart , addtocart , cartnum } from '../data/cart.js';
 import { products } from '../data/products.js'; 
 import { formatCurrency } from './utils/money.js';
 // module always has to top of the file , and opening file or render(html on chrome or load) we need to opne with live server , bcs module work with live server only 
@@ -66,17 +66,31 @@ products.forEach((product) => {
 document.querySelector('.js-products-grid').innerHTML = productHTML;
 // console.log(cart);
 
+let cartQuantity =JSON.parse(localStorage.getItem('cartnum'))
+console.log(+{cartQuantity})
+  // console.log(cartnu
+  // console.log(JSON.parse(localStorage.getItem('cartnum'))) //5 
+  if (cartQuantity===null){
+    document.querySelector('.js-cart-quantity ,.checkout-header-middle-section ').innerHTML=0;}
+    else{
+    
+    document.querySelector('.js-cart-quantity , .checkout-header-middle-section').innerHTML=`${cartQuantity}`;
+  }
+// update cart number
+
 function updatecartquantity(){
-
-   
-  let cartQuantity=0;
-
+  
+  let cartQuantity =JSON.parse(localStorage.getItem('cartnum'));
+  
+  // console.log(cartQuantity);
+  cartQuantity=0;
   cart.forEach((item)=>{
     cartQuantity +=item.quantity;
   });
-
+  localStorage.setItem('cartnum',JSON.stringify(cartQuantity));
   // console.log(cartQuantity)
-  document.querySelector('.js-cart-quantity').innerHTML=cartQuantity;
+
+  document.querySelector('.js-cart-quantity').innerHTML=`${cartQuantity}`;
 
   // console.log(cart);
 

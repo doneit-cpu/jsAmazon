@@ -13,7 +13,7 @@ export function renderpaymentSummary(){
     
     const deliveryOption= getDeliveryOption(cartItem.deliveryOptionsId)
     shippingPriceCents += deliveryOption.priceCents;
-    console.log(deliveryOption.priceCents)
+    // console.log(deliveryOption.priceCents)
     numofItem += cartItem.quantity;
   });
 
@@ -59,6 +59,7 @@ export function renderpaymentSummary(){
 
           document.querySelector('.payment-summary').innerHTML=paymentSummaryhtml;
 
+          document.querySelector('.checkout-header-middle-section').innerHTML=`Checkout(${numofItem} items)`;
 
           // document.querySelectorAll('.js-delivery-option')
           // .forEach((element)=>{
@@ -72,6 +73,7 @@ export function renderpaymentSummary(){
           // })
 
 }
+
 
 
 

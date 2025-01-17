@@ -15,6 +15,11 @@ function saveToStorage(){
   localStorage.setItem('cart',JSON.stringify(cart))
 }
 
+export let cartnum={
+  num:0,
+} || localStorage.setItem('cartnum',JSON.stringify(cartnum));
+// console.log(cartnum)
+
 export function addtocart(productId){  
   let matchingItem ;
       // console.log(cart,'lol'); // why this showed me anyhting here , when it is empty ,
@@ -43,12 +48,32 @@ export function addtocart(productId){
 export function removeFromCart(productId){
   const newCart =[];
 
+  let deleteitem=0;
 
   cart.forEach((cartItem)=>{
-    if(cartItem.productId !== productId){
+    if(cartItem.productId === productId){
+      deleteitem+=cartItem.quantity;
+    }
+    else {
       newCart.push(cartItem);
-    };
+    }
   });
+   
+  console.log(deleteitem);
+  
+  // console.log(cartnum);
+  // console.log(typeof());
+    // console.log( + typeof(deleteitem))
+
+    console.log(JSON.parse(localStorage.getItem('cartnum')) + "get");
+    console.log(deleteitem+"di")
+    
+
+ 
+  cartnum.num=JSON.parse(localStorage.getItem('cartnum'))-deleteitem;
+  console.log(cartnum.num+'cn')
+
+  localStorage.setItem('cartnum',JSON.stringify(cartnum.num));
 
   cart=newCart;
 
